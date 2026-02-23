@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Image
 from .forms import ImageForm
@@ -15,6 +15,6 @@ def upload_image(request):
             form.save()
             messages.success(request, 'Image uploaded successfully!')
             return redirect('imagelist')
-        else:
-            form = ImageForm()
+    else:
+        form = ImageForm()
     return render(request, 'images/upload_image.html', {'form': form})
