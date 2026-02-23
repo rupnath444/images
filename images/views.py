@@ -7,3 +7,14 @@ def image_list(request):
     images = Image.objects.all().order_by('-uploaded_to')
     context = {'images': images}
     return render(request, 'images/image_list.html', context)
+
+def upload_image(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Image uploaded successfully!')
+            return redirect('imagelist')
+        else:
+            form = ImageForm()
+    return render(request, 'images/upload_image.html', {'form': form})
