@@ -18,3 +18,8 @@ def upload_image(request):
     else:
         form = ImageForm()
     return render(request, 'images/upload_image.html', {'form': form})
+
+def update_image(request,pk):
+    image_instance=get_object_or_404(Image,pk=pk)
+    
+    if request.method==
