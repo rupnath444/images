@@ -17,7 +17,7 @@
                                 <small class="text-muted">Uploaded on {{ image.uploaded_to|date:"M d, Y" }}</small>
                             </p>
                             <a href="{% url 'updateimage' image.pk %}" class="btn btn-primary">Update</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'deleteimage' image.pk %}" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 </div>

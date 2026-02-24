@@ -22,7 +22,7 @@ def upload_image(request):
 
 def update_image(request,pk):
     image_instance=get_object_or_404(Image,pk=pk)
-    
+    form = ImageForm(instance=image_instance)
     if request.method== 'POST':
         form=ImageForm(request.POST,request.FILES,instance=image_instance)
         if form.is_valid():
@@ -30,7 +30,17 @@ def update_image(request,pk):
                 pass
             form.save()
             messages.success(request,'Image updated successfully!')
+            return redirect('imagelist')
     else: 
         form=ImageForm(instance=image_instance)
     context = {'form': form,'image_instance':image_instance}
     return render(request,'images/update_image.html',context)
+
+def delete_image(request,pk):
+    image_instance=get_object_or_404(Image,pk=pk)
+    if request.method=='POST':
+        image_instance.delete()
+        messages.success(request,'Image deleted successfully!')
+        return redirect('imagelist')
+    context={'image_instance':image_instance}
+    return render(request,'images/delete_image.html',context)
