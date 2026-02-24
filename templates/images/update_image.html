@@ -4,12 +4,12 @@
 <div class="row">
     <div class="col-md-6 offset-md-3">
         <h2>Update Image</h2>
-        {% if image.image %}
+        {% if image_instance.image %}
         <div class="mb-3">
             <label class="form-label">Current Image</label><br>
-            <img src = "{{ image.image.url }}" alt="{{ image.title }}" style="width:200px" height = "200px">
+            <img src="{{ image_instance.image.url }}" alt="{{ image_instance.title }}" style="width:200px" height="200px">
         </div>
-        {% endif %}    
+        {% endif %}
         <form action="{% url 'updateimage' image_instance.pk %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}

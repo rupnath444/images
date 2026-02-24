@@ -13,17 +13,21 @@ class Image(models.Model):
     def delete_old_image(self):
        "Delete the old image file from storage"
        if self.pk:
-           try:
+            try:
                old_image=Image.objects.get(pk=self.pk)
                if old_image and old_image.image!=self.image:
                    if os.path.isfile(old_image.image.path):
                        os.remove(old_image.image.path)
-           except Image.DoesNotExist:
+            except Image.DoesNotExist:
                pass
+           
+           
     def save(self, *args, **kwargs):
         "override and save to handle the image deletion"
         self.delete_old_image()
         super().save(*args, **kwargs)
+        
+        
     
     def delete(self, *args, **kwargs):
         "delete imaeg file when model instance is deleted"
